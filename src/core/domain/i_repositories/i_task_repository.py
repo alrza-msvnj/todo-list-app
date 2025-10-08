@@ -10,15 +10,11 @@ class ITaskRepository(ABC):
         pass
 
     @abstractmethod
-    def get_task(self, task_id: int) -> Task:
+    def get_task(self, task_id: int) -> Task | None:
         pass
 
     @abstractmethod
     def get_tasks(self) -> Sequence[Task]:
-        pass
-
-    @abstractmethod
-    def edit_task(self, task: Task) -> Task:
         pass
 
     @abstractmethod

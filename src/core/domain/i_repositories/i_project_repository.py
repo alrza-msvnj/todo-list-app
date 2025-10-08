@@ -10,15 +10,11 @@ class IProjectRepository(ABC):
         pass
 
     @abstractmethod
-    def get_project(self, project_id: int) -> Project:
+    def get_project(self, project_id: int) -> Project | None:
         pass
 
     @abstractmethod
     def get_projects(self) -> Sequence[Project]:
-        pass
-
-    @abstractmethod
-    def edit_project(self, project: Project) -> Project:
         pass
 
     @abstractmethod
