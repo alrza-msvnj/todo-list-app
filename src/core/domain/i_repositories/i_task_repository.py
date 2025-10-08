@@ -1,0 +1,26 @@
+from abc import ABC, abstractmethod
+from collections.abc import Sequence
+
+from core.domain.entities.task import Task
+
+
+class ITaskRepository(ABC):
+    @abstractmethod
+    def create_task(self, task: Task) -> Task:
+        pass
+
+    @abstractmethod
+    def get_task(self, task_id: int) -> Task:
+        pass
+
+    @abstractmethod
+    def get_tasks(self) -> Sequence[Task]:
+        pass
+
+    @abstractmethod
+    def edit_task(self, task: Task) -> Task:
+        pass
+
+    @abstractmethod
+    def delete_task(self, task: Task) -> Task:
+        pass
