@@ -1,13 +1,16 @@
+from dataclasses import dataclass
 from datetime import datetime
-from typing import Literal, TypedDict
+from typing import Literal
 
 
 class TaskDtos:
-    class AddTaskDto(TypedDict):
+    @dataclass
+    class AddTaskDto:
         title: str
         due_date: datetime | None
 
-    class EditTaskDto(TypedDict):
+    @dataclass
+    class EditTaskDto:
         id: int
         title: str | None
         due_date: datetime | None

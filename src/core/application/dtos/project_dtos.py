@@ -1,10 +1,12 @@
-from typing import TypedDict
+from dataclasses import dataclass
 
 
 class ProjectDtos:
-    class AddProjectDto(TypedDict):
+    @dataclass
+    class AddProjectDto:
         name: str
 
-    class EditProjectDto(TypedDict):
+    @dataclass
+    class EditProjectDto:
         id: int
         name: str
