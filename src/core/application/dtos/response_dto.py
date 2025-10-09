@@ -7,8 +7,10 @@ T = TypeVar("T")
 @dataclass
 class ResponseDto(Generic[T]):
     success: bool
-    result: T
-    message: str
+    result: T | None
+    message: str | None
 
-    def __init__(self):
-        self.success = True
+    def __init__(self, result: T | None = None, success: bool = True, message: str | None = None):
+        self.success = success
+        self.result = result
+        self.message = message
