@@ -9,3 +9,6 @@ class ResponseDto(Generic[T]):
     success: bool
     result: T
     message: str
+
+    def __init__(self):
+        self.success = True
