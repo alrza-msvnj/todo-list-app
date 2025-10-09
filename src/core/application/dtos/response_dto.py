@@ -1,11 +1,11 @@
 from dataclasses import dataclass
-from typing import TypeVar
+from typing import Generic, TypeVar
 
 
-T = TypeVar
+T = TypeVar("T")
 
 @dataclass
-class ResponseDto:
+class ResponseDto(Generic[T]):
     success: bool
     result: T
     message: str
