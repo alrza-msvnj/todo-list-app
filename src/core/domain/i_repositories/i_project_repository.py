@@ -14,6 +14,10 @@ class IProjectRepository(ABC):
         pass
 
     @abstractmethod
+    def get_project_by_name(self, name: str) -> Project | None:
+        pass
+
+    @abstractmethod
     def get_projects(self) -> Sequence[Project]:
         pass
 

@@ -20,6 +20,13 @@ class TaskRepository(ITaskRepository):
                 return task
         
         return None
+    
+    def get_task_by_title(self, title: str) -> Task | None:
+        for task in self.db.tasks:
+            if task.title == title:
+                return task
+        
+        return None
 
     def get_tasks(self) -> Sequence[Task]:
         return self.db.tasks

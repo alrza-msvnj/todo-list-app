@@ -20,6 +20,13 @@ class ProjectRepository(IProjectRepository):
                 return project
         
         return None
+    
+    def get_project_by_name(self, name: str) -> Project | None:
+        for project in self.db.projects:
+            if project.name == name:
+                return project
+        
+        return None
 
     def get_projects(self) -> Sequence[Project]:
         return self.db.projects

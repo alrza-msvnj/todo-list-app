@@ -14,6 +14,10 @@ class ITaskRepository(ABC):
         pass
 
     @abstractmethod
+    def get_task_by_title(self, title: str) -> Task | None:
+        pass
+
+    @abstractmethod
     def get_tasks(self) -> Sequence[Task]:
         pass
 
