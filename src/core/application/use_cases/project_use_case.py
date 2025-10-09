@@ -38,6 +38,10 @@ class ProjectUseCase(ProjectContract):
         if project is None:
             return ResponseDto[Project](None, False, 'Project does not exist.')
 
+        existing_project: Project | None = self.project_repository.get_project_by_name(edit_project_dto.name)
+        if existing_project is not None:
+            return ResponseDto[Project](None, False, 'A project with the same name already exists.')
+
         project.name = edit_project_dto.name
 
         return ResponseDto[Project](project)
