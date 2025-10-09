@@ -2,26 +2,27 @@ from abc import ABC, abstractmethod
 from collections.abc import Sequence
 
 from domain.entities.task import Task
+from core.application.dtos.response_dto import ResponseDto
 from application.dtos.task_dtos import TaskDtos
 
 
 class TaskContract(ABC):
     @abstractmethod
-    def add_task(self, add_task_dto: TaskDtos.AddTaskDto) -> Task:
+    def add_task(self, add_task_dto: TaskDtos.AddTaskDto) -> ResponseDto[Task]:
         pass
 
     @abstractmethod
-    def get_task(self, task_id: int) -> Task:
+    def get_task(self, task_id: int) -> ResponseDto[Task]:
         pass
 
     @abstractmethod
-    def get_tasks(self) -> Sequence[Task]:
+    def get_tasks(self) -> ResponseDto[Sequence[Task]]:
         pass
 
     @abstractmethod
-    def edit_task(self, edit_task_dto: TaskDtos.EditTaskDto) -> Task:
+    def edit_task(self, edit_task_dto: TaskDtos.EditTaskDto) -> ResponseDto[Task]:
         pass
     
     @abstractmethod
-    def remove_task(self, task_id: int) -> Task:
+    def remove_task(self, task_id: int) -> ResponseDto[Task]:
         pass
