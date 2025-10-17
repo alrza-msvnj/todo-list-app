@@ -24,7 +24,8 @@ while True:
     # Add project
     elif command == 1:
         name: str = input('Give your project a name:')
-        add_project_dto: ProjectDtos.AddProjectDto = ProjectDtos.AddProjectDto(name)
+        description: str | None = input('Give your project a description (optional):')
+        add_project_dto: ProjectDtos.AddProjectDto = ProjectDtos.AddProjectDto(name, description)
 
         response: ResponseDto[Project] = project_contract.add_project(add_project_dto)
         if not response.success:
@@ -33,16 +34,11 @@ while True:
         print(f'Your project created successfully: {response.result}')
     # Add task
     elif command == 2:
-        print ('In which project you want to add your task?')
-
-        response: ResponseDto[list[Project]] = project_contract.get_projects()
-        for project in response.result:
-            print(project.name)
-
-        project_name: str = input()
+        project_name: str = input('Enter the project name in which you want to add your task: ')
         title: str = input('Give your task a name:')
+        description: str | None = input('Give your task a description (optional):')
         due_date: datetime | None = input('Give your task a due date (optional):')
-        add_task_dto: TaskDtos.AddTaskDto = TaskDtos.AddTaskDto(project_name, title, due_date)
+        add_task_dto: TaskDtos.AddTaskDto = TaskDtos.AddTaskDto(project_name, title, description, due_date)
 
         response: ResponseDto[Task] = task_contract.add_task(add_task_dto)
         if not response.success:
