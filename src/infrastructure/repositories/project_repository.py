@@ -10,9 +10,7 @@ class ProjectRepository(IProjectRepository):
         self.db = in_memory_database
 
     def create_project(self, project: Project) -> Project:
-        self.db.projects.append(project)
-
-        return project
+        return self.db.create_project(project)
 
     def get_project(self, project_id: int) -> Project | None:
         for project in self.db.projects:

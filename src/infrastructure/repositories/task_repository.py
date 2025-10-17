@@ -10,9 +10,7 @@ class TaskRepository(ITaskRepository):
         self.db = in_memory_database
 
     def create_task(self, task: Task) -> Task:
-        self.db.tasks.append(task)
-
-        return task
+        return self.db.create_task(task)
 
     def get_task(self, task_id: int) -> Task | None:
         for task in self.db.tasks:

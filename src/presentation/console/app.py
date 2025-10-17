@@ -10,14 +10,24 @@ print('''Welcome to your Todo List program.
 ''')
 
 
-command: int = int(input('What do you want to do?'))
+command: int = 1
 
-if command == 1:
-    name: str = input('Give your project a name:')
-    add_project_dto: ProjectDtos.AddProjectDto = ProjectDtos.AddProjectDto(name)
+while command != 0:
+    command: int = int(input('What do you want to do?'))
 
-    response: ResponseDto[Project] = project_contract.add_project(add_project_dto)
-    if not response.success:
-        print(f'Error: {response.message}')
-    
-    print(f'Your project created successfully: {response.result}')
+    if command == 1:
+        name: str = input('Give your project a name:')
+        add_project_dto: ProjectDtos.AddProjectDto = ProjectDtos.AddProjectDto(name)
+
+        response: ResponseDto[Project] = project_contract.add_project(add_project_dto)
+        if not response.success:
+            print(f'Error: {response.message}')
+        
+        print(f'Your project created successfully: {response.result}')
+    elif command == 2:
+        response: ResponseDto[list[Project]] = project_contract.get_projects()
+        if not response.success:
+            print(f'Error: {response.message}')
+
+        for project in response.result:
+            print(project.name)
