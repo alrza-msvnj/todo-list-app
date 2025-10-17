@@ -14,7 +14,7 @@ class ITaskRepository(ABC):
         pass
 
     @abstractmethod
-    def get_task_by_title(self, project_id: int, task_title: str) -> Task | None:
+    def get_task_by_title(self, project_id: int, title: str) -> Task | None:
         pass
 
     @abstractmethod

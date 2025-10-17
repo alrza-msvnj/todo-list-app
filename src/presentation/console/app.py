@@ -31,7 +31,7 @@ while True:
         if not response.success:
             print(f'Error: {response.message}')
         
-        print(f'Your project created successfully: {response.result}')
+        print('Project created successfully.')
     # Add task
     elif command == 2:
         project_name: str = input('Enter the project name in which you want to add your task: ')
@@ -44,7 +44,7 @@ while True:
         if not response.success:
             print(f'Error: {response.message}')
         
-        print(f'Your task created successfully: {response.result}')
+        print('Task created successfully.')
     # Show projects
     elif command == 3:
         response: ResponseDto[list[Project]] = project_contract.get_projects()
@@ -88,7 +88,7 @@ while True:
         if not response.success:
             print(f'Error: {response.message}')
 
-        print(f'Task {title} edited successfully.')
+        print('Task edited successfully.')
     # Remove project
     elif command == 6:
         name: str = input('Enter project name to remove: ')
@@ -97,7 +97,7 @@ while True:
         if not response.success:
             print(f'Error: {response.message}')
 
-        print(f'Project {name} removed successfully.')
+        print('Project removed successfully.')
     # Remove task
     elif command == 7:
         project_name: str = input('Enter the project name of the task: ')
@@ -107,4 +107,4 @@ while True:
         if not response.success:
             print(f'Error: {response.message}')
 
-        print(f'Task {title} removed successfully.')
+        print('Task removed successfully.')

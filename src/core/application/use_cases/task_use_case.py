@@ -71,7 +71,7 @@ class TaskUseCase(TaskContract):
             if len(edit_task_dto.new_title) > 30:
                 return ResponseDto[Task](None, False, 'New title length cannot be more than 30 letters.')
 
-            existing_task: Task | None = self.task_repository.get_task_by_title(edit_task_dto.new_title)
+            existing_task: Task | None = self.task_repository.get_task_by_title(project.id, edit_task_dto.new_title)
             if existing_task is not None:
                 return ResponseDto[Task](None, False, 'A task with the same title already exists.')
 
