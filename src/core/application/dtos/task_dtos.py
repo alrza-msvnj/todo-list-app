@@ -8,11 +8,14 @@ class TaskDtos:
     class AddTaskDto:
         project_name: str
         title: str
+        description: str | None
         due_date: datetime | None
 
     @dataclass
     class EditTaskDto:
-        id: int
-        title: str | None
-        due_date: datetime | None
-        status: Literal['todo', 'doing', 'done'] | None
+        project_name: str
+        title: str
+        new_title: str | None
+        new_description: str | None
+        new_due_date: datetime | None
+        new_status: Literal['todo', 'doing', 'done'] | None

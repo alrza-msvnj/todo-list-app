@@ -15,6 +15,13 @@ class TaskUseCase(TaskContract):
         self.project_repository = project_repository
 
     def add_task(self, add_task_dto: TaskDtos.AddTaskDto) -> ResponseDto[Task]:
+        if len(add_task_dto.title) > 30:
+            return ResponseDto[Task](None, False, 'Title length cannot be more than 30 letters.')
+        
+        if add_task_dto.description is not None:
+            if len(add_task_dto.description) > 150:
+                return ResponseDto[Task](None, False, 'Description length cannot be more than 150 letters.')
+
         project: Project | None = self.project_repository.get_project_by_name(add_task_dto.project_name)
         if project is None:
             return ResponseDto[Task](None, False, f'No project found with the name {add_task_dto.project_name}.')
@@ -23,7 +30,7 @@ class TaskUseCase(TaskContract):
         if task is not None:
             return ResponseDto[Task](None, False, 'A task with the same title already exists.')
 
-        task = Task(project.id, add_task_dto.title, add_task_dto.due_date)
+        task = Task(project.id, add_task_dto.title, add_task_dto.description, add_task_dto.due_date)
         task = self.task_repository.create_task(task)
 
         return ResponseDto[Task](task)
@@ -49,19 +56,41 @@ class TaskUseCase(TaskContract):
         return ResponseDto[Sequence[Task]](tasks)
 
     def edit_task(self, edit_task_dto: TaskDtos.EditTaskDto) -> ResponseDto[Task]:
-        task: Task | None = self.task_repository.get_task(edit_task_dto.id)
+        if edit_task_dto.new_title is None and edit_task_dto.new_description is None and edit_task_dto.new_due_date is None and edit_task_dto.new_status is None:
+            return ResponseDto[Task](None, False, 'Enter a value to edit.')
+
+        project: Project | None = self.project_repository.get_project_by_name(edit_task_dto.project_name)
+        if project is None:
+            return ResponseDto[Task](None, False, f'No project found with the name {edit_task_dto.project_name}.')
+
+        task: Task | None = self.task_repository.get_task_by_title(project.id, edit_task_dto.title)
         if task is None:
             return ResponseDto[Task](None, False, 'Task does not exist.')
 
-        if edit_task_dto.title is not None:
-            existing_task: Task | None = self.task_repository.get_task_by_title(edit_task_dto.title)
+        if edit_task_dto.new_title is not None:
+            if len(edit_task_dto.new_title) > 30:
+                return ResponseDto[Task](None, False, 'New title length cannot be more than 30 letters.')
+
+            existing_task: Task | None = self.task_repository.get_task_by_title(edit_task_dto.new_title)
             if existing_task is not None:
                 return ResponseDto[Task](None, False, 'A task with the same title already exists.')
 
-            task.title = edit_task_dto.title
+            task.title = edit_task_dto.new_title
 
-        if edit_task_dto.due_date is not None:
-            task.due_date = edit_task_dto.due_date
+        if edit_task_dto.new_description is not None:
+            if len(edit_task_dto.new_description) > 150:
+                return ResponseDto[Task](None, False, 'New description length cannot be more than 150 letters.')
+
+            task.description = edit_task_dto.new_description
+
+        if edit_task_dto.new_due_date is not None:
+            task.due_date = edit_task_dto.new_due_date
+
+        if edit_task_dto.new_status is not None:
+            if edit_task_dto.new_status != 'todo' and edit_task_dto.new_status != 'doing' and edit_task_dto.new_status != 'done':
+                return ResponseDto[Task](None, False, 'New status should be one of these values: todo, doing, done.')
+
+            task.status = edit_task_dto.new_status
 
         return ResponseDto[Task](task)
     

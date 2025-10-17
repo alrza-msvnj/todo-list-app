@@ -14,12 +14,14 @@ while True:
     2. Add task
     3. Show projects
     4. Show tasks
-    5. Remove project
-    6. Remove task
+    5. Update task status
+    6. Remove project
+    7. Remove task
     '''))
 
     if command == 0:
         break
+    # Add project
     elif command == 1:
         name: str = input('Give your project a name:')
         add_project_dto: ProjectDtos.AddProjectDto = ProjectDtos.AddProjectDto(name)
@@ -29,6 +31,7 @@ while True:
             print(f'Error: {response.message}')
         
         print(f'Your project created successfully: {response.result}')
+    # Add task
     elif command == 2:
         print ('In which project you want to add your task?')
 
@@ -46,15 +49,41 @@ while True:
             print(f'Error: {response.message}')
         
         print(f'Your task created successfully: {response.result}')
+    # Show projects
     elif command == 3:
         response: ResponseDto[list[Project]] = project_contract.get_projects()
         for project in response.result:
             print(project.name)
+    # Show tasks
     elif command == 4:
         response: ResponseDto[list[Task]] = task_contract.get_tasks()
         for task in response.result:
-            print(task.title)
+            print(f'Title: {task.title} Due Date: {task.due_date} Status: {task.status}')
+    # Update task status
     elif command == 5:
+        print ('In which project you want to remove your task?')
+
+        response: ResponseDto[list[Project]] = project_contract.get_projects()
+        for project in response.result:
+            print(project.name)
+
+        project_name: str = input()
+
+        response: ResponseDto[list[Task]] = task_contract.get_tasks(project_name)
+        for task in response.result:
+            print(task.title)
+
+        title: str = input('Enter task name to update: ')
+
+        edit_task_dto: TaskDtos.EditTaskDto = TaskDtos.EditTaskDto(project_name, title)
+
+        response: ResponseDto[Project] = task_contract.edit_task()
+        if not response.success:
+            print(f'Error: {response.message}')
+
+        print(f'Task {title} removed successfully.')
+    # Remove project
+    elif command == 6:
         response: ResponseDto[list[Project]] = project_contract.get_projects()
         for project in response.result:
             print(project.name)
@@ -66,7 +95,8 @@ while True:
             print(f'Error: {response.message}')
 
         print(f'Project {name} removed successfully.')
-    elif command == 6:
+    # Remove task
+    elif command == 7:
         print ('In which project you want to remove your task?')
 
         response: ResponseDto[list[Project]] = project_contract.get_projects()

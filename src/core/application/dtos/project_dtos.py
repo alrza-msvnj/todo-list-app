@@ -5,8 +5,10 @@ class ProjectDtos:
     @dataclass
     class AddProjectDto:
         name: str
+        description: str | None
 
     @dataclass
     class EditProjectDto:
-        id: int
         name: str
+        new_name: str | None
+        new_description: str | None

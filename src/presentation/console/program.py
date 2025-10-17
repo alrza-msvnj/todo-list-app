@@ -14,5 +14,5 @@ db: InMemoryDatabase = InMemoryDatabase()
 project_repository: IProjectRepository = ProjectRepository(db)
 task_repository: ITaskRepository = TaskRepository(db)
 
-project_contract: ProjectContract = ProjectUseCase(project_repository)
+project_contract: ProjectContract = ProjectUseCase(project_repository, task_repository)
 task_contract: TaskContract = TaskUseCase(task_repository, project_repository)

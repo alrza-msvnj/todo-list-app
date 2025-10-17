@@ -6,8 +6,10 @@ from datetime import datetime, timezone
 class Project:
     id: int
     name: str
+    description: str | None
     creation_timestamp: datetime
     
-    def __init__(self, name: str):
+    def __init__(self, name: str, description: str | None = None):
         self.name = name
+        self.description = description
         self.creation_timestamp = datetime.now(timezone.utc)
