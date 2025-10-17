@@ -19,15 +19,22 @@ class TaskRepository(ITaskRepository):
         
         return None
     
-    def get_task_by_title(self, title: str) -> Task | None:
+    def get_task_by_title(self, project_id: int, title: str) -> Task | None:
         for task in self.db.tasks:
-            if task.title == title:
+            if task.project_id == project_id and task.title == title:
                 return task
         
         return None
 
-    def get_tasks(self) -> Sequence[Task]:
-        return self.db.tasks
+    def get_tasks(self, project_id: int | None = None) -> Sequence[Task]:
+        tasks: Sequence[Task] = self.db.tasks
+
+        if project_id is not None:
+            for task in tasks:
+                if task.project_id != project_id:
+                    tasks.remove(task)
+
+        return tasks
 
     def delete_task(self, task: Task) -> Task:
         self.db.tasks.remove(task)

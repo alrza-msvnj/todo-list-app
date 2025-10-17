@@ -24,5 +24,5 @@ class ProjectContract(ABC):
         pass
     
     @abstractmethod
-    def remove_project(self, project_id: int) -> ResponseDto[Project]:
+    def remove_project(self, name: str) -> ResponseDto[Project]:
         pass

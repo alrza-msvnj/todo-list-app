@@ -14,11 +14,11 @@ class ITaskRepository(ABC):
         pass
 
     @abstractmethod
-    def get_task_by_title(self, title: str) -> Task | None:
+    def get_task_by_title(self, project_id: int, task_title: str) -> Task | None:
         pass
 
     @abstractmethod
-    def get_tasks(self) -> Sequence[Task]:
+    def get_tasks(self, project_id: int | None = None) -> Sequence[Task]:
         pass
 
     @abstractmethod

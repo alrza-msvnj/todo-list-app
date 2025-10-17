@@ -46,8 +46,8 @@ class ProjectUseCase(ProjectContract):
 
         return ResponseDto[Project](project)
     
-    def remove_project(self, project_id: int) -> ResponseDto[Project]:
-        project: Project | None = self.project_repository.get_project(project_id)
+    def remove_project(self, name: str) -> ResponseDto[Project]:
+        project: Project | None = self.project_repository.get_project_by_name(name)
         if project is None:
             return ResponseDto[Project](None, False, 'Project does not exist.')
 

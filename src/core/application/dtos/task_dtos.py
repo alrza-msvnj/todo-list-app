@@ -6,6 +6,7 @@ from typing import Literal
 class TaskDtos:
     @dataclass
     class AddTaskDto:
+        project_name: str
         title: str
         due_date: datetime | None
 

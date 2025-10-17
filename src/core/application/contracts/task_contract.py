@@ -16,7 +16,7 @@ class TaskContract(ABC):
         pass
 
     @abstractmethod
-    def get_tasks(self) -> ResponseDto[Sequence[Task]]:
+    def get_tasks(self, project_name: str | None = None) -> ResponseDto[Sequence[Task]]:
         pass
 
     @abstractmethod
@@ -24,5 +24,5 @@ class TaskContract(ABC):
         pass
     
     @abstractmethod
-    def remove_task(self, task_id: int) -> ResponseDto[Task]:
+    def remove_task(self, project_name: str, title: str) -> ResponseDto[Task]:
         pass
