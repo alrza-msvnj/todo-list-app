@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from collections.abc import Sequence
 
-from domain.entities.project import Project
-from core.application.dtos.response_dto import ResponseDto
-from application.dtos.project_dtos import ProjectDtos
+from src.core.domain.entities.project import Project
+from src.core.application.dtos.response_dto import ResponseDto
+from src.core.application.dtos.project_dtos import ProjectDtos
 
 
 class ProjectContract(ABC):

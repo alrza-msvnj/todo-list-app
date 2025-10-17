@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections.abc import Sequence
 
-from core.domain.entities.project import Project
+from src.core.domain.entities.project import Project
 
 
 class IProjectRepository(ABC):

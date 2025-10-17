@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections.abc import Sequence
 
-from core.domain.entities.task import Task
+from src.core.domain.entities.task import Task
 
 
 class ITaskRepository(ABC):

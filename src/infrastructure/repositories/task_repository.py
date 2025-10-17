@@ -1,8 +1,8 @@
 from collections.abc import Sequence
 
-from core.domain.entities.task import Task
-from core.domain.i_repositories.i_task_repository import ITaskRepository
-from infrastructure.data.in_memory_database import InMemoryDatabase
+from src.core.domain.entities.task import Task
+from src.core.domain.i_repositories.i_task_repository import ITaskRepository
+from src.infrastructure.data.in_memory_database import InMemoryDatabase
 
 
 class TaskRepository(ITaskRepository):

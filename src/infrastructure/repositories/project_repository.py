@@ -1,8 +1,8 @@
 from collections.abc import Sequence
 
-from core.domain.entities.project import Project
-from core.domain.i_repositories.i_project_repository import IProjectRepository
-from infrastructure.data.in_memory_database import InMemoryDatabase
+from src.core.domain.entities.project import Project
+from src.core.domain.i_repositories.i_project_repository import IProjectRepository
+from src.infrastructure.data.in_memory_database import InMemoryDatabase
 
 
 class ProjectRepository(IProjectRepository):

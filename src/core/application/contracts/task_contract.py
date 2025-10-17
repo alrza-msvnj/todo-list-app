@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from collections.abc import Sequence
 
-from domain.entities.task import Task
-from core.application.dtos.response_dto import ResponseDto
-from application.dtos.task_dtos import TaskDtos
+from src.core.domain.entities.task import Task
+from src.core.application.dtos.response_dto import ResponseDto
+from src.core.application.dtos.task_dtos import TaskDtos
 
 
 class TaskContract(ABC):

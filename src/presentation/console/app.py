@@ -1,6 +1,6 @@
 from src.core.domain.entities.project import Project
-from core.application.dtos.response_dto import ResponseDto
 from src.core.application.dtos.project_dtos import ProjectDtos
+from src.core.application.dtos.response_dto import ResponseDto
 from src.presentation.console.program import project_contract
 
 
@@ -17,7 +17,7 @@ if command == 1:
     add_project_dto: ProjectDtos.AddProjectDto = ProjectDtos.AddProjectDto(name)
 
     response: ResponseDto[Project] = project_contract.add_project(add_project_dto)
-    if response.success:
+    if not response.success:
         print(f'Error: {response.message}')
-
+    
     print(f'Your project created successfully: {response.result}')

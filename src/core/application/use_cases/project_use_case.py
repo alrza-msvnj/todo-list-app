@@ -1,10 +1,10 @@
 from typing import Sequence
 
-from core.domain.entities.project import Project
-from core.domain.i_repositories.i_project_repository import IProjectRepository
-from core.application.dtos.response_dto import ResponseDto
-from core.application.contracts.project_contract import ProjectContract
-from core.application.dtos.project_dtos import ProjectDtos
+from src.core.domain.entities.project import Project
+from src.core.domain.i_repositories.i_project_repository import IProjectRepository
+from src.core.application.dtos.response_dto import ResponseDto
+from src.core.application.contracts.project_contract import ProjectContract
+from src.core.application.dtos.project_dtos import ProjectDtos
 
 
 class ProjectUseCase(ProjectContract):

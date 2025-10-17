@@ -1,7 +1,8 @@
-from core.domain.entities.project import Project
-from core.domain.entities.task import Task
+from src.core.domain.entities.project import Project
+from src.core.domain.entities.task import Task
 
 
 class InMemoryDatabase:
-    projects: list[Project] = []
-    tasks: list[Task] = []
+    def __init__(self):
+        self.projects: list[Project] = []
+        self.tasks: list[Task] = []

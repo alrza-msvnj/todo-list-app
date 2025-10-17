@@ -1,10 +1,10 @@
 from typing import Sequence
 
-from core.domain.entities.task import Task
-from core.domain.i_repositories.i_task_repository import ITaskRepository
-from core.application.dtos.response_dto import ResponseDto
-from core.application.contracts.task_contract import TaskContract
-from core.application.dtos.task_dtos import TaskDtos
+from src.core.domain.entities.task import Task
+from src.core.domain.i_repositories.i_task_repository import ITaskRepository
+from src.core.application.dtos.response_dto import ResponseDto
+from src.core.application.contracts.task_contract import TaskContract
+from src.core.application.dtos.task_dtos import TaskDtos
 
 
 class TaskUseCase(TaskContract):
