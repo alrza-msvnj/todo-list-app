@@ -95,10 +95,6 @@ while True:
         print(f'Task {title} edited successfully.')
     # Remove project
     elif command == 6:
-        response: ResponseDto[list[Project]] = project_contract.get_projects()
-        for project in response.result:
-            print(project.name)
-
         name: str = input('Enter project name to remove: ')
 
         response: ResponseDto[Project] = project_contract.remove_project(name)
@@ -108,19 +104,8 @@ while True:
         print(f'Project {name} removed successfully.')
     # Remove task
     elif command == 7:
-        print ('In which project you want to remove your task?')
-
-        response: ResponseDto[list[Project]] = project_contract.get_projects()
-        for project in response.result:
-            print(project.name)
-
-        project_name: str = input()
-
-        response: ResponseDto[list[Task]] = task_contract.get_tasks(project_name)
-        for task in response.result:
-            print(task.title)
-
-        title: str = input('Enter task name to remove: ')
+        project_name: str = input('Enter the project name of the task: ')
+        title: str = input('Enter the task title: ')
 
         response: ResponseDto[Project] = task_contract.remove_task(project_name, title)
         if not response.success:
