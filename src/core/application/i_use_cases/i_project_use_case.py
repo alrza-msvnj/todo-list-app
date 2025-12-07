@@ -6,7 +6,7 @@ from src.core.application.dtos.response_dto import ResponseDto
 from src.core.application.dtos.project_dtos import ProjectDtos
 
 
-class ProjectContract(ABC):
+class IProjectUseCase(ABC):
     @abstractmethod
     def add_project(self, add_project_dto: ProjectDtos.AddProjectDto) -> ResponseDto[Project]:
         pass

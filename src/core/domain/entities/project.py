@@ -9,7 +9,7 @@ class Project:
     description: str | None
     creation_timestamp: datetime
     
-    def __init__(self, name: str, description: str | None = None):
+    def __init__(self, name: str, description: str | None):
         self.name = name
         self.description = description
         self.creation_timestamp = datetime.now(timezone.utc)

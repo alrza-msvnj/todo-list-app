@@ -6,11 +6,11 @@ from src.core.domain.entities.task import Task
 from src.core.domain.i_repositories.i_project_repository import IProjectRepository
 from src.core.domain.i_repositories.i_task_repository import ITaskRepository
 from src.core.application.dtos.response_dto import ResponseDto
-from src.core.application.contracts.task_contract import TaskContract
+from src.core.application.i_use_cases.i_task_use_case import ITaskUseCase
 from src.core.application.dtos.task_dtos import TaskDtos
 
 
-class TaskUseCase(TaskContract):
+class TaskUseCase(ITaskUseCase):
     def __init__(self, task_repository: ITaskRepository, project_repository: IProjectRepository):
         self.task_repository = task_repository
         self.project_repository = project_repository

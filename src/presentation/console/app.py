@@ -5,7 +5,7 @@ from src.core.domain.entities.project import Project
 from src.core.application.dtos.project_dtos import ProjectDtos
 from src.core.application.dtos.response_dto import ResponseDto
 from src.core.domain.entities.task import Task
-from src.presentation.console.program import project_contract, task_contract
+from src.presentation.console.setup import i_project_use_case, i_task_use_case
 
 
 while True:
@@ -27,7 +27,7 @@ while True:
         description: str | None = input('Give your project a description (optional):')
         add_project_dto: ProjectDtos.AddProjectDto = ProjectDtos.AddProjectDto(name, description)
 
-        response: ResponseDto[Project] = project_contract.add_project(add_project_dto)
+        response: ResponseDto[Project] = i_project_use_case.add_project(add_project_dto)
         if not response.success:
             print(f'Error: {response.message}')
         
@@ -40,14 +40,14 @@ while True:
         due_date: datetime | None = input('Give your task a due date (year-month-day) (optional):')
         add_task_dto: TaskDtos.AddTaskDto = TaskDtos.AddTaskDto(project_name, title, description, due_date)
 
-        response: ResponseDto[Task] = task_contract.add_task(add_task_dto)
+        response: ResponseDto[Task] = i_task_use_case.add_task(add_task_dto)
         if not response.success:
             print(f'Error: {response.message}')
         
         print('Task created successfully.')
     # Show projects
     elif command == 3:
-        response: ResponseDto[list[Project]] = project_contract.get_projects()
+        response: ResponseDto[list[Project]] = i_project_use_case.get_projects()
         if len(response.result) == 0:
             print('There are no projects.')
 
@@ -61,7 +61,7 @@ while True:
     elif command == 4:
         project_name: str = input('Enter a project name to see its related tasks: ')
 
-        response: ResponseDto[list[Task]] = task_contract.get_tasks(project_name)
+        response: ResponseDto[list[Task]] = i_task_use_case.get_tasks(project_name)
         if len(response.result) == 0:
             print('There are no tasks for this project.')
 
@@ -84,7 +84,7 @@ while True:
 
         edit_task_dto: TaskDtos.EditTaskDto = TaskDtos.EditTaskDto(project_name, title, new_title, new_description, new_due_date, new_status)
 
-        response: ResponseDto[Project] = task_contract.edit_task(edit_task_dto)
+        response: ResponseDto[Project] = i_task_use_case.edit_task(edit_task_dto)
         if not response.success:
             print(f'Error: {response.message}')
 
@@ -93,7 +93,7 @@ while True:
     elif command == 6:
         name: str = input('Enter project name to remove: ')
 
-        response: ResponseDto[Project] = project_contract.remove_project(name)
+        response: ResponseDto[Project] = i_project_use_case.remove_project(name)
         if not response.success:
             print(f'Error: {response.message}')
 
@@ -103,7 +103,7 @@ while True:
         project_name: str = input('Enter the project name of the task: ')
         title: str = input('Enter the task title: ')
 
-        response: ResponseDto[Project] = task_contract.remove_task(project_name, title)
+        response: ResponseDto[Project] = i_task_use_case.remove_task(project_name, title)
         if not response.success:
             print(f'Error: {response.message}')
 

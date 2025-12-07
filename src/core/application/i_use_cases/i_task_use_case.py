@@ -6,7 +6,7 @@ from src.core.application.dtos.response_dto import ResponseDto
 from src.core.application.dtos.task_dtos import TaskDtos
 
 
-class TaskContract(ABC):
+class ITaskUseCase(ABC):
     @abstractmethod
     def add_task(self, add_task_dto: TaskDtos.AddTaskDto) -> ResponseDto[Task]:
         pass

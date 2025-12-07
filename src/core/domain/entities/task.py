@@ -13,7 +13,7 @@ class Task:
     status: Literal['todo', 'doing', 'done']
     creation_timestamp: datetime
 
-    def __init__(self, project_id: int, title: str, description: str| None = None, due_date: date | None = None):
+    def __init__(self, project_id: int, title: str, description: str| None, due_date: date | None):
         self.project_id = project_id
         self.title = title
         self.description = description

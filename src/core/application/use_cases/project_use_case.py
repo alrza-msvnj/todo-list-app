@@ -3,12 +3,12 @@ from typing import Sequence
 from src.core.domain.entities.project import Project
 from src.core.domain.i_repositories.i_project_repository import IProjectRepository
 from src.core.application.dtos.response_dto import ResponseDto
-from src.core.application.contracts.project_contract import ProjectContract
+from src.core.application.i_use_cases.i_project_use_case import IProjectUseCase
 from src.core.application.dtos.project_dtos import ProjectDtos
 from src.core.domain.i_repositories.i_task_repository import ITaskRepository
 
 
-class ProjectUseCase(ProjectContract):
+class ProjectUseCase(IProjectUseCase):
     def __init__(self, project_repository: IProjectRepository, task_repository: ITaskRepository):
         self.project_repository = project_repository
         self.task_repository = task_repository
