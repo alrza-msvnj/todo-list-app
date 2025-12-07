@@ -37,7 +37,7 @@ while True:
         project_name: str = input('Enter the project name in which you want to add your task: ')
         title: str = input('Give your task a name:')
         description: str | None = input('Give your task a description (optional):')
-        due_date: datetime | None = input('Give your task a due date (optional):')
+        due_date: datetime | None = input('Give your task a due date (year-month-day) (optional):')
         add_task_dto: TaskDtos.AddTaskDto = TaskDtos.AddTaskDto(project_name, title, description, due_date)
 
         response: ResponseDto[Task] = task_contract.add_task(add_task_dto)
@@ -79,7 +79,7 @@ while True:
         title: str = input('Enter the task name: ')
         new_title: str | None = input('Enter the new task name (optional): ')
         new_description: str | None = input('Enter the new task description (optional): ')
-        new_due_date: str | None = input('Enter the new task due date (optional): ')
+        new_due_date: str | None = input('Enter the new task due date (year-month-day) (optional): ')
         new_status: str | None = input('Enter the new task status (optional): ')
 
         edit_task_dto: TaskDtos.EditTaskDto = TaskDtos.EditTaskDto(project_name, title, new_title, new_description, new_due_date, new_status)

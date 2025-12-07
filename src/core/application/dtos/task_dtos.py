@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date
 from typing import Literal
 
 
@@ -9,7 +9,7 @@ class TaskDtos:
         project_name: str
         title: str
         description: str | None
-        due_date: datetime | None
+        due_date: date | None
 
     @dataclass
     class EditTaskDto:
@@ -17,5 +17,5 @@ class TaskDtos:
         title: str
         new_title: str | None
         new_description: str | None
-        new_due_date: datetime | None
+        new_due_date: date | None
         new_status: Literal['todo', 'doing', 'done'] | None
