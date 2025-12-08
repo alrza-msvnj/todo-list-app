@@ -7,6 +7,8 @@ T = TypeVar("T")
 
 
 class ResponseDto(GenericModel, Generic[T]):
-    success: bool
-    result: T | None
-    message: str | None
+    model_config = {"arbitrary_types_allowed": True}
+
+    success: bool = True
+    result: T | None = None
+    message: str | None = None

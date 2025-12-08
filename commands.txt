@@ -1,2 +1,4 @@
 Add migration --> poetry run alembic revision --autogenerate -m "{comment}"
 Update database --> poetry run alembic upgrade head
+
+Start app --> poetry run uvicorn src.presentation.api.app:app --reload

@@ -8,7 +8,7 @@ from src.infrastructure.persistence.data.base import Base
 class Task(Base):
     __tablename__ = "task"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     project_id = Column(Integer, ForeignKey("project.id"), index=True)
     title = Column(String(255), nullable=False)
     description = Column(String, nullable=True)

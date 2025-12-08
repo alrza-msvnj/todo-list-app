@@ -11,41 +11,41 @@ class ProjectEndpoint:
       self.project_use_case = project_use_case
       self.router = APIRouter(prefix="/project", tags=["project"])
 
-      self.router.add_api_route("/", self.add_project, methods=["POST"], response_model=ResponseDto[ProjectDtos.ProjectResponseDto])
-      self.router.add_api_route("/{project_id}", self.get_project, methods=["GET"], response_model=ResponseDto[ProjectDtos.ProjectResponseDto])
-      self.router.add_api_route("/", self.get_projects, methods=["GET"], response_model=ResponseDto[Sequence[ProjectDtos.ProjectResponseDto]])
-      self.router.add_api_route("/", self.edit_project, methods=["PUT"], response_model=ResponseDto[ProjectDtos.ProjectResponseDto])
-      self.router.add_api_route("/{name}", self.remove_project, methods=["DELETE"], response_model=ResponseDto[ProjectDtos.ProjectResponseDto])
+      self.router.add_api_route("/", self.add_project, methods=["POST"], response_model=ProjectDtos.ProjectResponseDto)
+      self.router.add_api_route("/{project_id}", self.get_project, methods=["GET"], response_model=ProjectDtos.ProjectResponseDto)
+      self.router.add_api_route("/", self.get_projects, methods=["GET"], response_model=Sequence[ProjectDtos.ProjectResponseDto])
+      self.router.add_api_route("/", self.edit_project, methods=["PUT"], response_model=ProjectDtos.ProjectResponseDto)
+      self.router.add_api_route("/{name}", self.remove_project, methods=["DELETE"], response_model=ProjectDtos.ProjectResponseDto)
 
-   def add_project(self, add_project_dto: ProjectDtos.AddProjectDto) -> ResponseDto[ProjectDtos.ProjectResponseDto]:
+   def add_project(self, add_project_dto: ProjectDtos.AddProjectDto) -> ProjectDtos.ProjectResponseDto:
       response: ResponseDto[ProjectDtos.ProjectResponseDto] = self.project_use_case.add_project(add_project_dto)
       if not response.success:
          raise HTTPException(status_code=400, detail=response.message)
       
       return response.result
 
-   def get_project(self, project_id: int) -> ResponseDto[ProjectDtos.ProjectResponseDto]:
+   def get_project(self, project_id: int) -> ProjectDtos.ProjectResponseDto:
       response: ResponseDto[ProjectDtos.ProjectResponseDto] = self.project_use_case.get_project(project_id)
       if not response.success:
          raise HTTPException(status_code=404, detail=response.message)
       
       return response.result
 
-   def get_projects(self) -> ResponseDto[Sequence[ProjectDtos.ProjectResponseDto]]:
+   def get_projects(self) -> Sequence[ProjectDtos.ProjectResponseDto]:
       response: ResponseDto[Sequence[ProjectDtos.ProjectResponseDto]] = self.project_use_case.get_projects()
       if not response.success:
          raise HTTPException(status_code=400, detail=response.message)
       
       return response.result
 
-   def edit_project(self, edit_project_dto: ProjectDtos.EditProjectDto) -> ResponseDto[ProjectDtos.ProjectResponseDto]:
+   def edit_project(self, edit_project_dto: ProjectDtos.EditProjectDto) -> ProjectDtos.ProjectResponseDto:
       response: ResponseDto[ProjectDtos.ProjectResponseDto] = self.project_use_case.edit_project(edit_project_dto)
       if not response.success:
          raise HTTPException(status_code=400, detail=response.message)
       
       return response.result
 
-   def remove_project(self, name: str) -> ResponseDto[ProjectDtos.ProjectResponseDto]:
+   def remove_project(self, name: str) -> ProjectDtos.ProjectResponseDto:
       response: ResponseDto[ProjectDtos.ProjectResponseDto] = self.project_use_case.remove_project(name)
       if not response.success:
          raise HTTPException(status_code=404, detail=response.message)
