@@ -1,8 +1,8 @@
-"""create project and task tables
+"""initial
 
-Revision ID: 8aea453cb9a2
+Revision ID: ee4881058453
 Revises: 
-Create Date: 2025-12-08 00:46:57.580650
+Create Date: 2025-12-08 15:05:00.311017
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '8aea453cb9a2'
+revision: str = 'ee4881058453'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -25,18 +25,19 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(), nullable=True),
-    sa.Column('creation_timestamp', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_project_name'), 'project', ['name'], unique=True)
     op.create_table('task',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('project_id', sa.Integer(), nullable=False),
+    sa.Column('project_id', sa.Integer(), nullable=True),
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('due_date', sa.DateTime(timezone=True), nullable=True),
     sa.Column('status', sa.String(length=20), nullable=False),
-    sa.Column('creation_timestamp', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('closed_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
     sa.ForeignKeyConstraint(['project_id'], ['project.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

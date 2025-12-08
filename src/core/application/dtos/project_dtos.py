@@ -1,14 +1,20 @@
-from dataclasses import dataclass
+from datetime import datetime
+
+from pydantic import BaseModel
 
 
 class ProjectDtos:
-    @dataclass
-    class AddProjectDto:
+    class ProjectResponseDto(BaseModel):
+        id: int
         name: str
-        description: str | None
+        description: str | None = None
+        created_at: datetime
 
-    @dataclass
-    class EditProjectDto:
+    class AddProjectDto(BaseModel):
         name: str
-        new_name: str | None
-        new_description: str | None
+        description: str | None = None
+
+    class EditProjectDto(BaseModel):
+        name: str
+        new_name: str | None = None
+        new_description: str | None = None

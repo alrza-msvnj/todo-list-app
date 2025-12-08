@@ -1,0 +1,2 @@
+Add migration --> poetry run alembic revision --autogenerate -m "{comment}"
+Update database --> poetry run alembic upgrade head

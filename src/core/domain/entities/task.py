@@ -1,58 +1,18 @@
-from dataclasses import dataclass
-from datetime import date, datetime, timezone
-from typing import Literal
+from datetime import datetime, timezone
 
-from sqlalchemy import DateTime, ForeignKey, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
 
 from src.infrastructure.persistence.data.base import Base
 
 
-TaskStatus = Literal["todo", "doing", "done"]
-
-
-@dataclass
 class Task(Base):
-    __tablename__ = 'task'
+    __tablename__ = "task"
 
-    id: Mapped[int] = mapped_column(
-        primary_key=True,
-        init=False
-    )
-
-    project_id: Mapped[int] = mapped_column(
-        ForeignKey("project.id"),
-        index=True
-    )
-    
-    title: Mapped[str] = mapped_column(
-        String(255),
-        nullable=False
-    )
-
-    description: Mapped[str | None] = mapped_column(
-        String,
-        nullable=True
-    )
-
-    due_date: Mapped[date | None] = mapped_column(
-        DateTime(timezone=True),
-        nullable=True
-    )
-
-    closed_at: Mapped[date | None] = mapped_column(
-        DateTime(timezone=True),
-        nullable=True
-    )
-
-    status: Mapped[TaskStatus] = mapped_column(
-        String(20),
-        default="todo",
-        nullable=False
-    )
-
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
-        default_factory=lambda: datetime.now(timezone.utc),
-        init=False
-    )
+    id = Column(Integer, primary_key=True)
+    project_id = Column(Integer, ForeignKey("project.id"), index=True)
+    title = Column(String(255), nullable=False)
+    description = Column(String, nullable=True)
+    due_date = Column(DateTime(timezone=True), nullable=True)
+    status = Column(String(20), default="todo", nullable=False)
+    closed_at = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
