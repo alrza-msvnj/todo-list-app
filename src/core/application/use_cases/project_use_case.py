@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from typing import Sequence
 
 from src.core.domain.entities.project import Project
@@ -25,7 +26,10 @@ class ProjectUseCase(IProjectUseCase):
         if project is not None:
             return ResponseDto[Project](None, False, 'A project with the same name already exists.')
 
-        project = Project(add_project_dto.name, add_project_dto.description)
+        project = Project(
+            name=add_project_dto.name, 
+            description=add_project_dto.description
+        )
         project = self.project_repository.create_project(project)
 
         return ResponseDto[Project](project)

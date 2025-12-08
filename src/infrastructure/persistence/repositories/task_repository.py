@@ -1,4 +1,5 @@
 from collections.abc import Sequence
+from datetime import datetime, timezone
 
 from sqlalchemy.orm import Session
 from sqlalchemy import select, delete
@@ -40,9 +41,28 @@ class TaskRepository(ITaskRepository):
         results = self.db.execute(query).scalars().all()
 
         return results
+    
+    def get_overdue_tasks(self) -> Sequence[Task]:
+        query = (
+            select(Task)
+            .where(
+                Task.due_date.isnot(None),
+                Task.due_date < datetime.now(timezone.utc),
+                Task.status.isnot('done')
+            )
+        )
+
+        result = self.db.scalars(query).all()
+
+        return result
 
     def delete_task(self, task: Task) -> Task:
         self.db.delete(task)
         self.db.commit()
         
         return task
+    
+    def commit(self) -> None:
+        self.db.commit()
+        
+        return

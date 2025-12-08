@@ -22,5 +22,13 @@ class ITaskRepository(ABC):
         pass
 
     @abstractmethod
+    def get_overdue_tasks(self) -> Sequence[Task]:
+        pass
+
+    @abstractmethod
     def delete_task(self, task: Task) -> Task:
+        pass
+
+    @abstractmethod
+    def commit(self) -> None:
         pass

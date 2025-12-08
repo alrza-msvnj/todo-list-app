@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Sequence
 
 from src.core.domain.entities.project import Project
@@ -23,12 +23,12 @@ class TaskUseCase(ITaskUseCase):
             if len(add_task_dto.description) > 150:
                 return ResponseDto[Task](None, False, 'Description length cannot be more than 150 letters.')
 
-        # if add_task_dto.due_date is not None:
-        #     try:
-        #         datetime.strptime(add_task_dto.due_date, '%Y-%m-%d')
-        #         return True
-        #     except ValueError:
-        #         return False
+        if add_task_dto.due_date is not None:
+            try:
+                datetime.strptime(add_task_dto.due_date, '%Y-%m-%d')
+                return True
+            except ValueError:
+                return False
 
         project: Project | None = self.project_repository.get_project_by_name(add_task_dto.project_name)
         if project is None:
@@ -38,7 +38,12 @@ class TaskUseCase(ITaskUseCase):
         if task is not None:
             return ResponseDto[Task](None, False, 'A task with the same title already exists.')
 
-        task = Task(project.id, add_task_dto.title, add_task_dto.description, add_task_dto.due_date)
+        task = Task(
+            project_id=project.id, 
+            title=add_task_dto.title, 
+            description=add_task_dto.description, 
+            due_date=add_task_dto.due_date
+        )
         task = self.task_repository.create_task(task)
 
         return ResponseDto[Task](task)

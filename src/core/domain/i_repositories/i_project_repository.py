@@ -24,3 +24,7 @@ class IProjectRepository(ABC):
     @abstractmethod
     def delete_project(self, project: Project) -> Project:
         pass
+
+    @abstractmethod
+    def commit(self) -> None:
+        pass

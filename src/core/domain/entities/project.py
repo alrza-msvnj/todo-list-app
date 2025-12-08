@@ -27,7 +27,7 @@ class Project(Base):
         nullable=True
     )
 
-    creation_timestamp: Mapped[datetime] = mapped_column(
+    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
         default=lambda: datetime.now(timezone.utc),

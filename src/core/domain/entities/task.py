@@ -40,13 +40,18 @@ class Task(Base):
         nullable=True
     )
 
+    closed_at: Mapped[date | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True
+    )
+
     status: Mapped[TaskStatus] = mapped_column(
         String(20),
         default="todo",
         nullable=False
     )
 
-    creation_timestamp: Mapped[datetime] = mapped_column(
+    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         default_factory=lambda: datetime.now(timezone.utc),
         init=False

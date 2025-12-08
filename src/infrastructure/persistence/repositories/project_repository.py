@@ -37,3 +37,8 @@ class ProjectRepository(IProjectRepository):
         self.db.commit()
 
         return project
+    
+    def commit(self) -> None:
+        self.db.commit()
+        
+        return
