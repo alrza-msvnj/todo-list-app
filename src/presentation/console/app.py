@@ -5,7 +5,7 @@ from src.core.domain.entities.project import Project
 from src.core.application.dtos.project_dtos import ProjectDtos
 from src.core.application.dtos.response_dto import ResponseDto
 from src.core.domain.entities.task import Task
-from src.presentation.console.setup import i_project_use_case, i_task_use_case
+from src.presentation.setup import i_project_use_case, i_task_use_case
 
 
 while True:
@@ -36,8 +36,8 @@ while True:
     elif command == 2:
         project_name: str = input('Enter the project name in which you want to add your task: ')
         title: str = input('Give your task a name:')
-        description: str | None = input('Give your task a description (optional):')
-        due_date: datetime | None = input('Give your task a due date (year-month-day) (optional):')
+        description: str | None = input('Give your task a description (optional):') or None
+        due_date: datetime | None = input('Give your task a due date (year-month-day) (optional):') or None
         add_task_dto: TaskDtos.AddTaskDto = TaskDtos.AddTaskDto(project_name, title, description, due_date)
 
         response: ResponseDto[Task] = i_task_use_case.add_task(add_task_dto)
